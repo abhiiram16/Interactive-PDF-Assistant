@@ -1,0 +1,238 @@
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+}
+
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    background: #0d0f14;
+    border-right: 1px solid #1f2229;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 100;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 16px 12px;
+}
+
+.sidebar-header h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #e8e9ed;
+    margin: 0;
+}
+
+.close-sidebar {
+    display: none;
+    background: none;
+    border: none;
+    color: #6b7280;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+}
+
+.close-sidebar:hover {
+    background: rgba(26, 29, 37, 0.5);
+    color: #9ca3af;
+}
+
+/* New Chat Button */
+.new-chat-btn {
+    margin: 8px 16px 16px;
+    padding: 10px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.new-chat-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.new-chat-btn span {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+/* Sessions List */
+.sessions-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 12px;
+}
+
+.sessions-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sessions-list::-webkit-scrollbar-thumb {
+    background: #1f2229;
+    border-radius: 2px;
+}
+
+.no-sessions {
+    text-align: center;
+    padding: 40px 16px;
+}
+
+.no-sessions p {
+    color: #6b7280;
+    font-size: 14px;
+    margin: 0 0 4px 0;
+}
+
+.no-sessions span {
+    color: #4b5563;
+    font-size: 12px;
+}
+
+/* Session Item */
+.session-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 4px;
+}
+
+.session-item:hover {
+    background: rgba(26, 29, 37, 0.5);
+}
+
+.session-item.active {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.session-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+}
+
+.session-pdf {
+    font-size: 13px;
+    color: #d1d5db;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.session-pdf svg {
+    color: #10b981;
+    flex-shrink: 0;
+}
+
+.session-time {
+    font-size: 11px;
+    color: #4b5563;
+    margin-left: 18px;
+}
+
+.delete-session {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6b7280;
+    opacity: 0;
+    transition: opacity 0.2s;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.session-item:hover .delete-session {
+    opacity: 0.6;
+}
+
+.delete-session:hover {
+    opacity: 1 !important;
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.08);
+}
+
+/* Footer */
+.sidebar-footer {
+    padding: 16px;
+    border-top: 1px solid #1f2229;
+}
+
+.tech-stack {
+    text-align: center;
+}
+
+.tech-stack span {
+    font-size: 11px;
+    color: #4b5563;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.tech-badges {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+}
+
+.badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    background: rgba(26, 29, 37, 0.5);
+    border: 1px solid #1f2229;
+    border-radius: 12px;
+    color: #6b7280;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .sidebar-overlay {
+        display: block;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .close-sidebar {
+        display: block;
+    }
+}

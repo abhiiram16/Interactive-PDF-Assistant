@@ -1,0 +1,9 @@
+flask
+flask-cors
+google-generativeai
+PyPDF2
+langchain
+langchain-google-genai
+python-dotenv
+numpy
+groq
