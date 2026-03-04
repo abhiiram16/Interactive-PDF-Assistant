@@ -4,7 +4,8 @@
 
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:5000';
+// Automatically use the host URL in production, but localhost:5000 for local development
+const API_BASE = import.meta.env.PROD ? '' : 'http://localhost:5000';
 
 // Create axios instance with defaults
 const api = axios.create({

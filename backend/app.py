@@ -12,7 +12,9 @@ from werkzeug.utils import secure_filename
 from config import UPLOAD_FOLDER, MAX_FILE_SIZE
 from rag_engine import parse_pdf, chunk_text, get_embeddings, find_relevant_chunks, generate_response
 
-app = Flask(__name__)
+# Integrate React Static Files for Production Deployment
+client_dist_folder = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'client', 'dist')
+app = Flask(__name__, static_folder=client_dist_folder, static_url_path='/')
 CORS(app, origins=["http://localhost:5173", "http://127.0.0.1:5173"])
 
 app.config['MAX_CONTENT_LENGTH'] = MAX_FILE_SIZE
@@ -22,18 +24,14 @@ app.config['MAX_CONTENT_LENGTH'] = MAX_FILE_SIZE
 sessions = {}
 
 
-@app.route("/", methods=["GET"])
-def index():
-    """Health check endpoint."""
-    return jsonify({
-        "status": "running",
-        "message": "RAG PDF Chat API is live",
-        "endpoints": {
-            "POST /upload": "Upload a PDF for processing",
-            "POST /chat": "Chat with an uploaded PDF",
-            "GET /sessions": "List all active sessions"
-        }
-    })
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    """Serve the React frontend and fallback to index.html for client-side routing."""
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return app.send_static_file(path)
+    else:
+        return app.send_static_file('index.html')
 
 
 @app.route("/upload", methods=["POST"])
