@@ -199,11 +199,10 @@ def generate_response(query, context_chunks):
 
         # Craft the prompt
         prompt = f"""You are a helpful AI assistant that answers questions based on the provided document context.
-Use ONLY the information from the context below to answer the question. If the answer is not
-found in the context, say "I couldn't find that information in the uploaded document."
+First, try to answer the question using ONLY the information from the context below.
+If the answer is NOT found in the context, you may use your own general knowledge to answer the question, but please clarify that the information is from your general knowledge and not the document.
 
-Be concise but thorough in your answers. If relevant, mention which part of the document
-your answer comes from.
+Be concise but thorough in your answers.
 
 CONTEXT FROM DOCUMENT:
 {context}
@@ -243,9 +242,8 @@ def generate_response_llama(query, context_chunks):
         messages = [
             {
                 "role": "system",
-                "content": """You are a helpful AI assistant that answers questions based on document context.
-Use ONLY the provided context to answer. If the answer isn't in the context,
-say "I couldn't find that information in the uploaded document." 
+                "content": """You are a helpful AI assistant. First, try to answer the user's question using ONLY the provided document context.
+If the answer isn't in the context, use your own general knowledge to answer, but politely mention that it is not explicitly stated in the document.
 Be concise, clear, and direct. DO NOT repeat the same lists or sentences over and over."""
             },
             {
